@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
             ShoppingAppTheme {
               Surface(modifier = Modifier.fillMaxSize(),
                   color = MaterialTheme.colorScheme.background){
-                  homePage()
+                  HomePage()
               }
             }
         }
@@ -35,6 +35,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     ShoppingAppTheme {
-homePage()
+HomePage()
     }
 }

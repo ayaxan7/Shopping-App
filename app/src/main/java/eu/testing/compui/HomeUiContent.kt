@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.dp
 import eu.testing.compui.ui.theme.*
 
 @Composable
-fun homePage() {
+fun HomePage() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -48,7 +48,7 @@ fun homePage() {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            buttons(icon = R.drawable.align_left_svgrepo_com, tint = Color.White, toast = "Navbar Clicked")
+            Buttons(icon = R.drawable.align_left_svgrepo_com, tint = Color.White, toast = "Navbar Clicked")
             Text(
                 text = "Shoppers' Stop",
                 modifier = Modifier.padding(vertical = 10.dp),
@@ -56,7 +56,7 @@ fun homePage() {
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center
             )
-            buttons(icon = R.drawable.search_alt_2_svgrepo_com, tint = Color.White,toast="Search Clicked")
+            Buttons(icon = R.drawable.search_alt_2_svgrepo_com, tint = Color.White,toast="Search Clicked")
         }
 
         // Scrolling content
@@ -65,23 +65,22 @@ fun homePage() {
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
         ) {
-            for (i in 0 until 10){
+            for (i in 0 until 10) {
                 RowOfItems(
-                    icon1 = R.drawable.align_left_svgrepo_com,
-                    title1 = "White Shirt",
-                    icon2 = R.drawable.search_alt_2_svgrepo_com,
-                    title2 = "Black Shirt"
+                    icon1 = R.drawable.green_shoe,
+                    title1 = "Green Shoe",
+                    icon2 = R.drawable.red_shoe,
+                    title2 = "Red Shoe"
                 )
                 RowOfItems(
-                    icon2 = R.drawable.align_left_svgrepo_com,
-                    title2 = "White Shirt",
-                    icon1 = R.drawable.search_alt_2_svgrepo_com,
-                    title1 = "Black Shirt"
+                    icon1 = R.drawable.red_shoe,
+                    title1 = "Red Shoe",
+                    icon2 = R.drawable.green_shoe,
+                    title2 = "Green Shoe"
+
                 )
             }
-            }
-
-
+        }
     }
 }
 
@@ -127,12 +126,12 @@ fun items(
                     textAlign = TextAlign.Center,
                     color = Color.Black
                 )
-                buttons(icon = R.drawable.shopping_cart_outline_svgrepo_com, tint = darkPink ,toast="Added to cart")
+                Buttons(icon = R.drawable.shopping_cart_outline_svgrepo_com, tint = darkPink ,toast="Added to cart")
             }
         }
 }
 @Composable
-fun buttons(
+fun Buttons(
     @DrawableRes icon: Int,
     tint: Color = Color.Unspecified,
     toast:String
