@@ -48,7 +48,11 @@ fun HomePage() {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Buttons(icon = R.drawable.align_left_svgrepo_com, tint = Color.White, toast = "Navbar Clicked")
+            Buttons(
+                icon = R.drawable.align_left_svgrepo_com,
+                tint = Color.White,
+                toast = "Navbar Clicked"
+            )
             Text(
                 text = "Shoppers' Stop",
                 modifier = Modifier.padding(vertical = 10.dp),
@@ -56,7 +60,11 @@ fun HomePage() {
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center
             )
-            Buttons(icon = R.drawable.search_alt_2_svgrepo_com, tint = Color.White,toast="Search Clicked")
+            Buttons(
+                icon = R.drawable.search_alt_2_svgrepo_com,
+                tint = Color.White,
+                toast = "Search Clicked"
+            )
         }
 
         // Scrolling content
@@ -85,59 +93,68 @@ fun HomePage() {
 }
 
 @Composable
-fun RowOfItems(@DrawableRes icon1:Int,
-               title1:String,
-               @DrawableRes icon2:Int,
-                title2:String)
-{
-Row(modifier=Modifier.padding(vertical=10.dp)
-    .fillMaxWidth().padding(horizontal = 36.dp),
-    horizontalArrangement = Arrangement.SpaceBetween){
-    items(icon = icon1, title = title1)
-    items(icon = icon2, title = title2)
+fun RowOfItems(
+    @DrawableRes icon1: Int,
+    title1: String,
+    @DrawableRes icon2: Int,
+    title2: String
+) {
+    Row(
+        modifier = Modifier.padding(vertical = 10.dp)
+            .fillMaxWidth().padding(horizontal = 36.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Items(icon = icon1, title = title1)
+        Items(icon = icon2, title = title2)
     }
 }
+
 @Composable
-fun items(
+fun Items(
     @DrawableRes icon: Int,
     title: String,
 ) {
-        Card(
-            modifier = Modifier
-                .padding(10.dp)
-                .border(2.dp, Color.White, shape = RoundedCornerShape(16.dp))
-                .background(White),
-            elevation = CardDefaults.cardElevation(4.dp)
+    Card(
+        modifier = Modifier
+            .padding(10.dp)
+            .border(2.dp, Color.White, shape = RoundedCornerShape(16.dp))
+            .background(White),
+        elevation = CardDefaults.cardElevation(4.dp)
+    ) {
+        // Column to hold Image and Text vertically
+        Column(
+            modifier = Modifier.padding(16.dp), // Padding inside the card
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Column to hold Image and Text vertically
-            Column(
-                modifier = Modifier.padding(16.dp), // Padding inside the card
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Image(
-                    painter = painterResource(id = icon),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .width(56.dp)
-                        .height(56.dp)
-                )
-                Text(
-                    text = title,
-                    textAlign = TextAlign.Center,
-                    color = Color.Black
-                )
-                Buttons(icon = R.drawable.shopping_cart_outline_svgrepo_com, tint = darkPink ,toast="Added to cart")
-            }
+            Image(
+                painter = painterResource(id = icon),
+                contentDescription = null,
+                modifier = Modifier
+                    .width(56.dp)
+                    .height(56.dp)
+            )
+            Text(
+                text = title,
+                textAlign = TextAlign.Center,
+                color = Color.Black
+            )
+            Buttons(
+                icon = R.drawable.shopping_cart_outline_svgrepo_com,
+                tint = darkPink,
+                toast = "Added to cart"
+            )
         }
+    }
 }
+
 @Composable
 fun Buttons(
     @DrawableRes icon: Int,
     tint: Color = Color.Unspecified,
-    toast:String
+    toast: String
 ) {
-    var context= LocalContext.current
-    IconButton(onClick = { Toast.makeText(context,"${toast}",Toast.LENGTH_SHORT).show() }) {
+    val context = LocalContext.current
+    IconButton(onClick = { Toast.makeText(context, toast, Toast.LENGTH_SHORT).show() }) {
         Icon(
             painter = painterResource(id = icon),
             contentDescription = null,
