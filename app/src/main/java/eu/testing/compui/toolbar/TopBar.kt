@@ -1,5 +1,6 @@
 package eu.testing.compui.toolbar
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -27,7 +28,7 @@ import eu.testing.compui.ui.theme.darkPink
 import kotlinx.coroutines.launch
 
 @Composable
-fun TopBar(drawerState: DrawerState,title:String) {
+fun TopBar(drawerState: DrawerState,title:String,@DrawableRes rightButton:Int) {
     val scope = rememberCoroutineScope()
     Column(
         modifier = Modifier
@@ -62,9 +63,9 @@ fun TopBar(drawerState: DrawerState,title:String) {
                 textAlign = TextAlign.Center
             )
             Buttons(
-                icon = R.drawable.search_alt_2_svgrepo_com,
+                icon = rightButton,
                 tint = Color.White,
-                toast = "Search Clicked"
+//                toast = "Search Clicked"
             )
         }
     }

@@ -47,7 +47,7 @@ fun HomePage(navController: NavHostController) {
             DrawerContent(navController=navController,drawerState=drawerState)
         }
     ) {
-        TopBar(drawerState = drawerState,title="Shoppers' Stop")
+        TopBar(drawerState = drawerState,title="Shoppers' Stop", rightButton = R.drawable.search_alt_2_svgrepo_com)
         // Scrolling content
         Column(
             modifier = Modifier
@@ -132,10 +132,8 @@ fun Items(
 fun Buttons(
     @DrawableRes icon: Int,
     tint: Color = Color.Unspecified,
-    toast: String
+//    toast: String
 ) {
-    val scope= rememberCoroutineScope()
-    val context = LocalContext.current
     IconButton(onClick = { }) {
         Icon(
             painter = painterResource(id = icon),
