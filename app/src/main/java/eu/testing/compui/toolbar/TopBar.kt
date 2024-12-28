@@ -28,7 +28,7 @@ import eu.testing.compui.ui.theme.darkPink
 import kotlinx.coroutines.launch
 
 @Composable
-fun TopBar(drawerState: DrawerState,title:String,@DrawableRes rightButton:Int) {
+fun TopBar(drawerState: DrawerState, title: String, @DrawableRes rightButton: Int) {
     val scope = rememberCoroutineScope()
     Column(
         modifier = Modifier
