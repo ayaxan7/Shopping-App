@@ -122,7 +122,7 @@ fun Items(
             Buttons(
                 icon = R.drawable.shopping_cart_outline_svgrepo_com,
                 tint = darkPink,
-                toast = "Added to cart"
+//                toast = "Added to cart"
             )
         }
     }
