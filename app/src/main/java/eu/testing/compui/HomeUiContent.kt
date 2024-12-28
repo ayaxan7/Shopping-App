@@ -1,6 +1,5 @@
 package eu.testing.compui
 
-import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -18,59 +17,42 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import eu.testing.compui.toolbar.DrawerContent
+import eu.testing.compui.toolbar.TopBar
 import eu.testing.compui.ui.theme.*
 
 @Composable
-fun HomePage() {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(White)
-    ) {
-        // Toolbar at the top of the screen
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(56.dp)
-                .background(darkPink),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Buttons(
-                icon = R.drawable.align_left_svgrepo_com,
-                tint = Color.White,
-                toast = "Navbar Clicked"
-            )
-            Text(
-                text = "Shoppers' Stop",
-                modifier = Modifier.padding(vertical = 10.dp),
-                color = Color.White,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center
-            )
-            Buttons(
-                icon = R.drawable.search_alt_2_svgrepo_com,
-                tint = Color.White,
-                toast = "Search Clicked"
-            )
+fun HomePage(navController: NavHostController) {
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    ModalNavigationDrawer(
+        drawerState = drawerState,
+        gesturesEnabled = drawerState.isOpen,
+        drawerContent = {
+            DrawerContent(navController=navController,drawerState=drawerState)
         }
-
+    ) {
+        TopBar(drawerState = drawerState)
         // Scrolling content
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .padding(top=60.dp)
                 .verticalScroll(rememberScrollState())
         ) {
             for (i in 0 until 10) {
@@ -85,11 +67,11 @@ fun HomePage() {
                     title1 = "Red Shoe",
                     icon2 = R.drawable.green_shoe,
                     title2 = "Green Shoe"
-
                 )
             }
         }
     }
+
 }
 
 @Composable
@@ -153,8 +135,9 @@ fun Buttons(
     tint: Color = Color.Unspecified,
     toast: String
 ) {
+    val scope= rememberCoroutineScope()
     val context = LocalContext.current
-    IconButton(onClick = { Toast.makeText(context, toast, Toast.LENGTH_SHORT).show() }) {
+    IconButton(onClick = { }) {
         Icon(
             painter = painterResource(id = icon),
             contentDescription = null,

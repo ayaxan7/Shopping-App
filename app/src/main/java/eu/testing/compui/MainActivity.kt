@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import eu.testing.compui.navigation.NavigationGraph
 import eu.testing.compui.ui.theme.ShoppingAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -21,20 +22,13 @@ class MainActivity : ComponentActivity() {
 //        enableEdgeToEdge()
         setContent {
             ShoppingAppTheme {
-              Surface(modifier = Modifier.fillMaxSize(),
-                  color = MaterialTheme.colorScheme.background){
-                  HomePage()
-              }
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    NavigationGraph()
+                }
             }
         }
-    }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ShoppingAppTheme {
-HomePage()
     }
 }
