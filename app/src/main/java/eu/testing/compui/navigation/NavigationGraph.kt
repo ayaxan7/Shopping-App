@@ -9,17 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import eu.testing.compui.HomePage
-
-@Composable
-fun SettingsPage(navController: NavHostController) {
-    Text(
-        text="Settings",
-        modifier=Modifier
-            .clickable {
-                navController.navigate("home")
-            }
-        )
-}
+import eu.testing.compui.toolbar.screens.Settings
 
 @Composable
 fun AboutPage() {
@@ -34,7 +24,7 @@ fun NavigationGraph() {
             HomePage(navController=navController)
         }
         composable("settings") {
-            SettingsPage(navController=navController)
+            Settings(navController=navController)
         }
     }
 }

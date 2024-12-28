@@ -16,12 +16,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
+
 import eu.testing.compui.ui.theme.darkPink
 import kotlinx.coroutines.launch
 
 @Composable
-fun DrawerContent(navController: NavHostController, drawerState: DrawerState) {
+fun DrawerContent(navController: NavController, drawerState: DrawerState) {
     val scope = rememberCoroutineScope()
     Column(
         modifier = Modifier
@@ -40,7 +41,7 @@ fun DrawerContent(navController: NavHostController, drawerState: DrawerState) {
                 .clickable {
                     scope.launch { navController.navigate("home") }
                 },
-            fontWeight = FontWeight.SemiBold,
+//            fontWeight = FontWeight.SemiBold,
             fontSize = 20.sp,
             color = Color.White
         )
@@ -66,7 +67,7 @@ fun DrawerContent(navController: NavHostController, drawerState: DrawerState) {
                 },
 //            fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
-            color = Color.Black
+            color = Color.White
         )
     }
 }

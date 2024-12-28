@@ -47,7 +47,7 @@ fun HomePage(navController: NavHostController) {
             DrawerContent(navController=navController,drawerState=drawerState)
         }
     ) {
-        TopBar(drawerState = drawerState)
+        TopBar(drawerState = drawerState,title="Shoppers' Stop")
         // Scrolling content
         Column(
             modifier = Modifier
@@ -71,7 +71,6 @@ fun HomePage(navController: NavHostController) {
             }
         }
     }
-
 }
 
 @Composable

@@ -27,7 +27,7 @@ import eu.testing.compui.ui.theme.darkPink
 import kotlinx.coroutines.launch
 
 @Composable
-fun TopBar(drawerState: DrawerState) {
+fun TopBar(drawerState: DrawerState,title:String) {
     val scope = rememberCoroutineScope()
     Column(
         modifier = Modifier
@@ -55,7 +55,7 @@ fun TopBar(drawerState: DrawerState) {
                 )
             }
             Text(
-                text = "Shoppers' Stop",
+                text = title,
                 modifier = Modifier.padding(vertical = 10.dp),
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
