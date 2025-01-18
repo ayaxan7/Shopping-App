@@ -1,9 +1,11 @@
 package eu.testing.compui
 
+import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -32,27 +34,34 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.google.firebase.auth.FirebaseAuth
 import eu.testing.compui.toolbar.DrawerContent
 import eu.testing.compui.toolbar.TopBar
 import eu.testing.compui.ui.theme.*
 
 @Composable
-fun HomePage(navController: NavHostController) {
+fun HomePage(navController: NavController) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     ModalNavigationDrawer(
         drawerState = drawerState,
         gesturesEnabled = drawerState.isOpen,
         drawerContent = {
-            DrawerContent(navController=navController,drawerState=drawerState)
+            DrawerContent(navController = navController, drawerState = drawerState)
         }
     ) {
-        TopBar(drawerState = drawerState,title="Shoppers' Stop", rightButton = R.drawable.search_alt_2_svgrepo_com)
+        TopBar(
+            drawerState = drawerState,
+            title = "Shoppers' Stop",
+            rightButton = R.drawable.search_alt_2_svgrepo_com
+        )
         // Scrolling content
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top=60.dp)
+                .padding(top = 60.dp)
                 .verticalScroll(rememberScrollState())
         ) {
             for (i in 0 until 10) {
@@ -60,13 +69,15 @@ fun HomePage(navController: NavHostController) {
                     icon1 = R.drawable.green_shoe,
                     title1 = "Green Shoe",
                     icon2 = R.drawable.red_shoe,
-                    title2 = "Red Shoe"
+                    title2 = "Red Shoe",
+                    navController = navController
                 )
                 RowOfItems(
                     icon1 = R.drawable.red_shoe,
                     title1 = "Red Shoe",
                     icon2 = R.drawable.green_shoe,
-                    title2 = "Green Shoe"
+                    title2 = "Green Shoe",
+                    navController = navController
                 )
             }
         }
@@ -78,11 +89,17 @@ fun RowOfItems(
     @DrawableRes icon1: Int,
     title1: String,
     @DrawableRes icon2: Int,
-    title2: String
+    title2: String,
+    navController: NavController
 ) {
     Row(
-        modifier = Modifier.padding(vertical = 10.dp)
-            .fillMaxWidth().padding(horizontal = 36.dp),
+        modifier = Modifier
+            .padding(vertical = 10.dp)
+            .fillMaxWidth()
+            .padding(horizontal = 36.dp)
+            .clickable {
+                navController.navigate("product_details")
+            },
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Items(icon = icon1, title = title1)
@@ -132,9 +149,27 @@ fun Items(
 fun Buttons(
     @DrawableRes icon: Int,
     tint: Color = Color.Unspecified,
+
 //    toast: String
 ) {
-    IconButton(onClick = { }) {
+    val navController= rememberNavController()
+    val context = LocalContext.current
+//    val click =
+//        if (icon == R.drawable.logout_svgrepo_com) FirebaseAuth.getInstance().signOut() else null
+    IconButton(onClick = {
+        try {
+            if (icon == R.drawable.logout_svgrepo_com) {
+                FirebaseAuth.getInstance().signOut()
+                navController.navigate("login")
+            }
+            else if(icon == R.drawable.search_alt_2_svgrepo_com) {
+                Log.d("Search", "Search clicked")
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Log.d("FireabaseAuth", "User laready logged out")
+        }
+    }) {
         Icon(
             painter = painterResource(id = icon),
             contentDescription = null,
